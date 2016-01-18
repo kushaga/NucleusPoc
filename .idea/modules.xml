@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/NucleusPoc.iml" filepath="$PROJECT_DIR$/NucleusPoc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nucleus/nucleus.iml" filepath="$PROJECT_DIR$/nucleus/nucleus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nucleus-support-v4/nucleus-support-v4.iml" filepath="$PROJECT_DIR$/nucleus-support-v4/nucleus-support-v4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nucleus-support-v7/nucleus-support-v7.iml" filepath="$PROJECT_DIR$/nucleus-support-v7/nucleus-support-v7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nucleus-test-kit/nucleus-test-kit.iml" filepath="$PROJECT_DIR$/nucleus-test-kit/nucleus-test-kit.iml" />
+    </modules>
+  </component>
+</project>

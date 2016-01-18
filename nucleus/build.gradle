@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 22
+    }
+}
+
+configurations {
+    compileJavadoc
+}
+
+dependencies {
+    compile "com.android.support:support-annotations:22.2.1"
+    compile "io.reactivex:rxjava:1.0.14"
+    compileJavadoc "com.android.support:support-annotations:22.2.1"
+    compileJavadoc "io.reactivex:rxjava:1.0.14"
+
+    testCompile project(':nucleus-test-kit')
+}
+
+android.libraryVariants.all { variant ->
+    def name = variant.buildType.name
+    if (name.equals(com.android.builder.core.BuilderConstants.DEBUG)) {
+        return; // Skip debug builds.
+    }
+    def task = project.tasks.create "jar${name.capitalize()}", Jar
+    task.dependsOn variant.javaCompile
+    task.from variant.javaCompile.destinationDir
+    artifacts.add('archives', task);
+}

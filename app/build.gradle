@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.example.akosha.sample1.nucleuspoc"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    minSdkVersion = 14
+    targetSdkVersion = 22
+    compileSdkVersion = 22
+    buildToolsVersion = '22.0.1'
+    supportLibraryVersion = '22.2.1'
+    rxVersion = '1.0.14'
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'io.reactivex:rxandroid:0.24.0'
+    compile 'io.reactivex:rxjava:1.0.8'
+    compile 'info.android15.nucleus:nucleus-support-v4:2.0.4'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'info.android15.nucleus:nucleus:2.0.4'
+    compile 'info.android15.nucleus:nucleus-support-v7:2.0.4'
+
+}

@@ -1,0 +1,27 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 22
+    }
+}
+
+repositories {
+    mavenLocal()
+}
+
+configurations {
+    compileJavadoc
+}
+
+dependencies {
+    compile "com.android.support:appcompat-v7:22.2.1"
+    compile "info.android15.nucleus:nucleus:2.0.4"
+    compileJavadoc "com.android.support:appcompat-v7:22.2.1"
+    compileJavadoc "info.android15.nucleus:nucleus:2.0.4"
+}
+

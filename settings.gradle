@@ -1,0 +1,1 @@
+include ':app',':nucleus', ':nucleus-support-v7', ':nucleus-support-v4',':nucleus-test-kit'
