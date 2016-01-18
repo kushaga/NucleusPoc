@@ -30,17 +30,20 @@ public class MainPocActivity extends NucleusActivity<PocActivityPresenter> {
     private MockAdapterRecycler adapter;
     private LinearLayoutManager mLayoutManager;
 
+    int loadView = R.layout.on_load_view;
+    int completedView = R.layout.activity_poc_main;
+
+    ViewGroup parent;
+    TextView initText;
+    int index = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_poc_main);
+        setContentView(R.layout.initial_view);
 
-        List<MockData.Employee> e2 = new ArrayList<>();
-        listMain = (RecyclerView) findViewById(R.id.listViewPoc);
-        adapter = new MockAdapterRecycler(this, e2);
-        mLayoutManager = new LinearLayoutManager(this);
-        listMain.setLayoutManager(mLayoutManager);
-        listMain.setAdapter(adapter);
+        parent = (ViewGroup) findViewById(R.id.parent);
+        initText = (TextView) findViewById(R.id.textInit);
 
 //        if (savedInstanceState == null) {
         //start the presenter
@@ -52,15 +55,55 @@ public class MainPocActivity extends NucleusActivity<PocActivityPresenter> {
     * receive items from presenter here and add to the adapter
     * */
     public void onItemsNext(MockData.Employee[] employees) {
-        adapter.addValues(employees);
-        adapter.notifyDataSetChanged();
+//        adapter.addValues(employees);
+//        adapter.notifyDataSetChanged();
+        onLoadComplete(employees);
     }
 
+    /*
+      * on load complete
+      * */
+    public void onLoadComplete(MockData.Employee[] employees) {
+        //// intialise recycler view and bind data to adapter
+        //// TODO: replace th view of the activity
+        showParent();
+        parent.removeAllViews();
+        View C = getLayoutInflater().inflate(completedView, parent, false);
+        parent.addView(C, index);
+
+        List<MockData.Employee> e2 = new ArrayList<>();
+
+        for (MockData.Employee e1 : employees) {
+            e2.add(e1);
+        }
+
+        listMain = (RecyclerView) findViewById(R.id.listViewPoc);
+        adapter = new MockAdapterRecycler(this, e2);
+        mLayoutManager = new LinearLayoutManager(this);
+        listMain.setLayoutManager(mLayoutManager);
+        listMain.setAdapter(adapter);
+    }
+
+
+    public void onLoadView() {
+        showParent();
+        View C = getLayoutInflater().inflate(loadView, parent, false);
+        parent.addView(C, index);
+    }
+
+    /*
+    * show parent and hide all the other components
+    * */
+    private void showParent() {
+        initText.setVisibility(View.GONE);
+        parent.setVisibility(View.VISIBLE);
+    }
 
     /**
      * handle on network error , show on error view
      */
     public void onNetworkError(Throwable throwable) {
+        //// TODO: 18/01/16
         //show on error view to this activity
         Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_LONG).show();
     }

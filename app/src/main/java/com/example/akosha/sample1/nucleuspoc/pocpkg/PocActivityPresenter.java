@@ -7,8 +7,10 @@ import com.example.akosha.sample1.nucleuspoc.pocpkg.data.MockData;
 import nucleus.presenter.RxPresenter;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.Action2;
 import rx.functions.Func0;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by kushagarlall on 14/01/16.
@@ -27,10 +29,23 @@ public class PocActivityPresenter extends RxPresenter<MainPocActivity> {
         super.onCreate(savedState);
         //// main logic here , to be done in background
 
+
         restartableLatestCache(REQUEST_ITEMS,
                 new Func0<Observable<MockData>>() {
                     @Override
                     public Observable<MockData> call() {
+
+                        view().subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Action1<MainPocActivity>() {
+                                    @Override
+                                    public void call(MainPocActivity mainPocActivity) {
+                                        mainPocActivity.onLoadView();
+                                    }
+                                })
+                        ;
+
+
                         return MockApp.getMockApi()
                                 .getMockData().observeOn(AndroidSchedulers.mainThread());
                     }
